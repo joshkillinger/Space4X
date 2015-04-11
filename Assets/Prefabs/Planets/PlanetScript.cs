@@ -8,13 +8,13 @@ public class PlanetScript : MonoBehaviour
 	public int Rads;
 	public float Gravity;
 
-	public int SurfaceAdamantine = 0;
-	public int SurfaceRadite = 0;
-	public int SurfaceGermanium = 0;
+	public int SurfaceMinerals = 0;
+	public int SurfaceCrystals = 0;
+	public int SurfaceOrganics = 0;
 
-	public int UnminedAdamantine = 0;
-	public int UnminedRadite = 0;
-	public int UnminedGermanium = 0;
+	public int UnminedMinerals = 0;
+	public int UnminedCrystals = 0;
+	public int UnminedOrganics = 0;
 
 	void Start()
 	{
@@ -32,9 +32,9 @@ public class PlanetScript : MonoBehaviour
 
 		Gravity = Random.Range(.033f, 1.5f) + Random.Range(.033f, 1.5f) + Random.Range(.033f, 1.5f);
 
-		UnminedAdamantine = Random.Range(0, 10000);
-		UnminedRadite = Random.Range(0, 10000);
-		UnminedGermanium = Random.Range(0, 10000);
+		UnminedMinerals = Random.Range(0, 10000);
+		UnminedCrystals = Random.Range(0, 10000);
+		UnminedOrganics = Random.Range(0, 10000);
 	}
 
 }
