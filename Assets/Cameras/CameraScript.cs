@@ -53,14 +53,8 @@ public class CameraScript : MonoBehaviour
 		float dy = Input.GetAxis("Mouse Y");
 
 		//track total distance moved
-		if (dx < 0)
-			panDistance -= dx;
-		else
-			panDistance += dx;
-		if (dy < 0)
-			panDistance -= dy;
-		else
-			panDistance += dy;
+		panDistance += Mathf.Abs(dx);
+		panDistance += Mathf.Abs(dy);
 
 		//calculate pan distance
 		float zoomFactor = transform.position.z * -1;
