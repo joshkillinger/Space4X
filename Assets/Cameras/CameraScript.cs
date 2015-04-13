@@ -75,7 +75,7 @@ public class CameraScript : MonoBehaviour
 			if (Physics.Raycast(clickRay, out clickHit, Mathf.Infinity))
 			{
 				SelectedObject = clickHit.transform.gameObject;
-				Debug.Log(SelectedObject.name);
+				Debug.Log(SelectedObject.GetComponent<PlanetScript>().Info);
 			}
 		}
 		else

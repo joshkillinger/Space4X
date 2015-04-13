@@ -13,7 +13,7 @@ public class GameManagerScript : MonoBehaviour
 	public void Generate()
 	{
 		GenerateGalaxy gen = gameObject.GetComponent<GenerateGalaxy>();
-		gen.GeneratePlanets();
+		gen.GeneratePlanets(GenerateGalaxy.GalaxyType.Random);
 	}
 
 	public void Save()

@@ -37,4 +37,19 @@ public class PlanetScript : MonoBehaviour
 		UnminedOrganics = Random.Range(0, 10000);
 	}
 
+	public string Info
+	{
+		get
+		{
+			string info = "Planet at " + transform.position.x + "," + transform.position.y + ":" + System.Environment.NewLine;
+			info += "Atmospheric Pressure: " + AtmoPressure + "A" + System.Environment.NewLine;
+			info += "Average Temperature: " + AvgTemp + "C" + System.Environment.NewLine;
+			info += "Gravity: " + Gravity + "G" + System.Environment.NewLine;
+			info += "Radiation: " + Rads + "mR" + System.Environment.NewLine;
+			info += "Minerals (Unmined): " + SurfaceMinerals + " (" + UnminedMinerals + ")" + System.Environment.NewLine;
+			info += "Crystals (Unmined): " + SurfaceCrystals + " (" + UnminedCrystals + ")" + System.Environment.NewLine;
+			info += "Organics (Unmined): " + SurfaceOrganics + " (" + UnminedOrganics + ")" + System.Environment.NewLine;
+			return info;
+		}
+	}
 }
