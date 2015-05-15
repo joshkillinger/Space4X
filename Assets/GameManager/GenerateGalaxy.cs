@@ -3,22 +3,44 @@ using System.Collections;
 
 public class GenerateGalaxy : MonoBehaviour
 {
-	public static int Spread;
-	public static int PlanetCount;
-	public static int MinDistance;
+	public static int Size = 250;
+	public static int Density = 6;
 	public static GalaxyType GenerationType = GalaxyType.Random;
+	public static bool Generate = false;
+	public static bool Load = false;
 
 	public GameObject PlanetPrefab;
 
 	public enum GalaxyType
 	{
-		Grid,
-		Spiral,
-		Random
+		Random = 0,
+		Spiral = 1,
+		Grid = 2
+	}
+
+	void Start()
+	{
+		if (Generate)
+		{
+			GeneratePlanets();
+			Generate = false;
+		}
+		else if (Load)
+		{
+			LoadGame();
+			Load = false;
+		}
+		//otherwise do nothing
+	}
+
+	void LoadGame()
+	{
+		throw new System.NotImplementedException("Load game not yet implemented");
 	}
 
 	public void GeneratePlanets()
 	{
+		Debug.Log("Generating planets in " + GenerationType.ToString() + " mode.");
 		switch (GenerationType)
 		{
 			case GalaxyType.Grid:
@@ -48,15 +70,11 @@ public class GenerateGalaxy : MonoBehaviour
 
 	private void GenerateRandom()
 	{
+		int planetCount = Size / Density;
 		//find the max width/height of the galaxy
-		int maxRange = (int)Mathf.Ceil(Mathf.Sqrt(PlanetCount));
-		maxRange += (maxRange % 2);
+		int maxRange = Size / 2;
 
-		//scale up the galaxy
-		maxRange *= Spread;
-		maxRange /= 2;
-
-		for (int i = 0; i < PlanetCount; i++)
+		for (int i = 0; i < planetCount; i++)
 		{
 			bool failed = true;
 
@@ -88,11 +106,12 @@ public class GenerateGalaxy : MonoBehaviour
 	private void GenerateGrid()
 	{
 		//find the max width/height of the galaxy
-		int maxRange = (int)Mathf.Ceil(Mathf.Sqrt(PlanetCount));
+		int planetCount = Size / Density;
+		
+		int maxRange = (int)Mathf.Ceil(planetCount);
 		maxRange += (maxRange % 2);
 
-		//shift the planets slightly so they aren't perfectly aligned
-		int maxJitter = (Spread / 2) - MinDistance;
+		int maxJitter = Density / 2;
 
 		for (int y = -(maxRange / 2); y < (maxRange / 2); y++)
 		{
@@ -101,8 +120,8 @@ public class GenerateGalaxy : MonoBehaviour
 				//sometimes there is a gap
 				if (Random.Range(0, 3) == 0) continue;
 
-				int xpos = (x * Spread) + Random.Range(-maxJitter, maxJitter);
-				int ypos = (y * Spread) + Random.Range(-maxJitter, maxJitter);
+				int xpos = (x * Size) + Random.Range(-maxJitter, maxJitter);
+				int ypos = (y * Size) + Random.Range(-maxJitter, maxJitter);
 				CreatePlanet(new Vector3(xpos, ypos, 0));
 			}
 		}
@@ -128,7 +147,7 @@ public class GenerateGalaxy : MonoBehaviour
 		foreach (GameObject p in GameObject.FindGameObjectsWithTag("Planet"))
 		{
 			Vector3 distance = p.transform.position - position;
-			if (distance.sqrMagnitude < (MinDistance * MinDistance))
+			if (distance.sqrMagnitude < (Density * Density))
 			{
 				Debug.Log("Too close to an existing planet, try again.");
 				return false;
@@ -147,4 +166,27 @@ public class GenerateGalaxy : MonoBehaviour
 	{
 		GameObject planet = Instantiate(PlanetPrefab, position, Quaternion.identity) as GameObject;
 	}
+
+	#region Setup
+	public void SelectSize(int size)
+	{
+		Size = size;
+	}
+
+	public void SelectDensity(int density)
+	{
+		Density = density;
+	}
+
+	public void SelectType(int type)
+	{
+		GenerationType = (GenerateGalaxy.GalaxyType)type;
+	}
+
+	public void CreateGalaxyBtnClicked()
+	{
+		Generate = true;
+		Application.LoadLevel("MainScene");
+	}
+	#endregion
 }
