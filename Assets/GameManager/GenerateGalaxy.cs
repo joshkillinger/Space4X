@@ -3,9 +3,10 @@ using System.Collections;
 
 public class GenerateGalaxy : MonoBehaviour
 {
-	public int Spread;
-	public int PlanetCount;
-	public int MinDistance;
+	public static int Spread;
+	public static int PlanetCount;
+	public static int MinDistance;
+	public static GalaxyType GenerationType = GalaxyType.Random;
 
 	public GameObject PlanetPrefab;
 
@@ -16,9 +17,9 @@ public class GenerateGalaxy : MonoBehaviour
 		Random
 	}
 
-	public void GeneratePlanets(GalaxyType type)
+	public void GeneratePlanets()
 	{
-		switch (type)
+		switch (GenerationType)
 		{
 			case GalaxyType.Grid:
 				GenerateGrid();
@@ -34,7 +35,7 @@ public class GenerateGalaxy : MonoBehaviour
 
 			default:
 				//we shouldn't ever get here, but generate a Grid anyway
-				Debug.LogError("Oops! Default switch condition reached in GeneratePlanets() with " + type.ToString());
+				Debug.LogError("Oops! Default switch condition reached in GeneratePlanets() with " + GenerationType.ToString());
 				GenerateGrid();
 				break;
 		}
