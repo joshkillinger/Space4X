@@ -70,7 +70,7 @@ public class GenerateGalaxy : MonoBehaviour
 
 	private void GenerateRandom()
 	{
-		int planetCount = Size / Density;
+		int planetCount = (Size / Density) * 2;
 		//find the max width/height of the galaxy
 		int maxRange = Size / 2;
 
