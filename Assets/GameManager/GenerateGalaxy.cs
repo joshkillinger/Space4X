@@ -188,5 +188,18 @@ public class GenerateGalaxy : MonoBehaviour
 		Generate = true;
 		Application.LoadLevel("MainScene");
 	}
+
+	public void CancelBtnClicked()
+	{
+		//reset to defaults
+		Size = 250;
+		Density = 6;
+		GenerationType = GalaxyType.Random;
+		Generate = false;
+		Load = false;
+
+		//return to launch screen
+		Application.LoadLevel("Launch");
+	}
 	#endregion
 }
