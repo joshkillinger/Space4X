@@ -6,8 +6,10 @@ public class CameraScript : MonoBehaviour
 {
 	public float ScrollSpeed;
 	public float PanSpeed;
+	public float MaxZoom;
+	public float MinZoom;
 
-	public GameObject SelectedObject;
+	public GameObject UIPanel;
 
 	private float panDistance = 0;
 
@@ -44,6 +46,19 @@ public class CameraScript : MonoBehaviour
 		if (mouseZ != 0)
 		{
 			transform.Translate(Vector3.forward * mouseZ * ScrollSpeed);
+
+			if (transform.position.z > MinZoom)
+			{
+				Vector3 clampedPosition = transform.position;
+				clampedPosition.z = MinZoom;
+				transform.position = clampedPosition;
+			}
+			if (transform.position.z < MaxZoom)
+			{
+				Vector3 clampedPosition = transform.position;
+				clampedPosition.z = MaxZoom;
+				transform.position = clampedPosition;
+			}
 		}
 	}
 
@@ -74,8 +89,8 @@ public class CameraScript : MonoBehaviour
 			RaycastHit clickHit;
 			if (Physics.Raycast(clickRay, out clickHit, Mathf.Infinity))
 			{
-				SelectedObject = clickHit.transform.gameObject;
-				Debug.Log(SelectedObject.GetComponent<PlanetScript>().Info);
+				GameUIScript uiScript = UIPanel.GetComponent<GameUIScript>();
+				uiScript.SelectedObject = clickHit.transform.gameObject;
 			}
 		}
 		else

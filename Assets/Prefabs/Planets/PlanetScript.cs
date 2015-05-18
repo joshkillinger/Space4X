@@ -4,9 +4,9 @@ using System.Collections;
 public class PlanetScript : MonoBehaviour
 {
 	public float AtmoPressure = 0;
+	public float Gravity;
 	public int AvgTemp;
 	public int Rads;
-	public float Gravity;
 
 	public int SurfaceMinerals = 0;
 	public int SurfaceCrystals = 0;
@@ -15,6 +15,8 @@ public class PlanetScript : MonoBehaviour
 	public int UnminedMinerals = 0;
 	public int UnminedCrystals = 0;
 	public int UnminedOrganics = 0;
+
+	public string PlanetName = "";
 
 	void Start()
 	{
@@ -41,7 +43,7 @@ public class PlanetScript : MonoBehaviour
 	{
 		get
 		{
-			string info = "Planet at " + transform.position.x + "," + transform.position.y + ":" + System.Environment.NewLine;
+			string info = "Planet " + PlanetName + " at " + transform.position.x + "," + transform.position.y + ":" + System.Environment.NewLine;
 			info += "Atmospheric Pressure: " + AtmoPressure + "A" + System.Environment.NewLine;
 			info += "Average Temperature: " + AvgTemp + "C" + System.Environment.NewLine;
 			info += "Gravity: " + Gravity + "G" + System.Environment.NewLine;
