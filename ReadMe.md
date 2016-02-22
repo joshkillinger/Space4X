@@ -1,3 +1,5 @@
+This project is not currently in development.
+
 Space4X: A Space Strategy Game built in Unity 5 as a learning project
 Copyright (C) 2015 Joshua Killinger
 
